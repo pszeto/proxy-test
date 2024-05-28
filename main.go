@@ -35,11 +35,13 @@ func main() {
 		if err != nil {
 			fmt.Println("can't parse well known oidc")
 			fmt.Println("err:", err)
+			continue
 		}
 		base, err := url.Parse(baseUrl)
 		if err != nil {
 			fmt.Println("can't parse issuer url")
 			fmt.Println("err:", err)
+			continue
 		}
 		discoveryURL := base.ResolveReference(oidcConf)
 		fmt.Println("discoveryUrl = " + discoveryURL.String())
