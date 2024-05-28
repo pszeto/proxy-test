@@ -36,6 +36,6 @@ spec:
           value: http://PHXAPPGWE2-VIP.phx.aexp.com:9090
         - name: no_proxy
           value: .aexp.com,cluster.local,172.28.128.0/17,192.168.0.0/16
-        image: docker.io/pszeto/proxy-test:v2
-        imagePullPolicy: IfNotPresent
+        image: docker.io/pszeto/proxy-test:latest
+        imagePullPolicy: Always
         name: proxy-test

@@ -26,8 +26,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Println("Staring endless for loop")
-	for {
+	fmt.Println("Staring for loop")
+	for i := 0; i < 3600; i++ {
 		fmt.Println("OIDC_BASE_URL = " + baseUrl)
 		fmt.Println("Retrieving well-known/openid-configuration")
 
@@ -91,8 +91,8 @@ func main() {
 
 			if reader.N <= 0 {
 				fmt.Println("max body length exceeded")
+				continue
 			}
-
 			fmt.Println(string(data))
 		}
 		fmt.Println("Sleeping for 60 seconds")
