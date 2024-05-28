@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proxy-test
+  namespace: default
+  labels:
+    app: proxy-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: proxy-test
+  template:
+    metadata:
+      labels:
+        app: proxy-test
+    spec:
+      containers:
+      - env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: OIDC_BASE_URL
+          value: "https://dev-92474822.okta.com/"
+        - name: HTTP_PROXY
+          value: http://PHXAPPGWE2-VIP.phx.aexp.com:9090
+        - name: REDIS_READ_TIMEOUT
+          value: 180s
+        - name: REDIS_WRITE_TIMEOUT
+          value: 180s
+        - name: http_proxy
+          value: http://PHXAPPGWE2-VIP.phx.aexp.com:9090
+        - name: https_proxy
+          value: http://PHXAPPGWE2-VIP.phx.aexp.com:9090
+        - name: no_proxy
+          value: .aexp.com,cluster.local,172.28.128.0/17,192.168.0.0/16
+        image: docker.io/pszeto/proxy-test:v2
+        imagePullPolicy: IfNotPresent
+        name: proxy-test
